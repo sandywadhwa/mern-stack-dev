@@ -1,0 +1,37 @@
+[
+    {
+        "text" : "Which command defines the author email to be used for all commits by the current user.",
+        "choices" : ["git clean -f", "git config --global user.email", "git merge --no-ff", "git email--amend"],
+        "answer" : "git config --global user.email"
+    },
+    {
+        "text" : "What's the git command that downloads your repository from GitHub to your computer?",
+        "choices" : ["git push", "git fork", "git clone", "git commit"],
+        "answer" : "git clone"
+    },
+    {
+        "text" : "How do you create a copy of a someone else's repo under your own GitHub account?",
+        "choices" : ["Forking it via the GitHub interface.", "git fork", "git clone", "git pull-request"],
+        "answer" : "Forking it via the GitHub interface."
+    },
+    {
+        "text" : "What's the opposite of git clone, instead of downloading your code from GitHub, uploads your changes and code back to GitHub?",
+        "choices" : ["git push", "git add", "git upload", "git status"],
+        "answer" : "git push"
+    },
+    {
+        "text" : "How do you check the state of your local git repository since your last commit?",
+        "choices" : ["git check", "git status", "git commit", "git diff"],
+        "answer" : "git status"
+    },
+    {
+        "text" : "Which command do we use to stage files before a commit?",
+        "choices" : ["git stage", "git commit", "git add", "git reset"],
+        "answer" : "git add"
+    },
+    {
+        "text" : "How do you supply a commit message to a commit?",
+        "choices" : ["git message \"I'm coding\"", "git add \"I'm coding\"", "git commit \"I'm coding\"", "git commit -m \"I'm coding\""],
+        "answer" : "git commit -m \"I'm coding\""
+    }
+]
