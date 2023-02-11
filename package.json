@@ -1,0 +1,11 @@
+{
+  "name": "mern-stack-dev",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "git@github.com:sandywadhwa/mern-stack-dev.git",
+  "author": "sandywadhwa <sandy.wadhwa@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
