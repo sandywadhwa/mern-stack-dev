@@ -22,10 +22,12 @@ const userSchema = new mongoose.Schema({
 		type: String
 	},
 	is_approved : {
-		type: Boolean
+		type: Boolean,
+		default: false
 	},
 	is_deleted : {
-		type: Boolean
+		type: Boolean,
+		default: false
 	}
 });
 
