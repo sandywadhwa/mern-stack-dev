@@ -1,4 +1,7 @@
+require('dotenv').config()
 const express = require('express');
+const mongoose = require('mongoose');
+
 const app = express();
 const util = require('util')
 const port = process.env.PORT || 3030;
@@ -30,7 +33,16 @@ app.get('/api/products', (req, res) => {
 app.get('/:page', (req, res) => res.sendFile(util.format("%s/frontend/public/views/%s.html", __dirname, req.params.page)));
 
 
-app.listen(port, () => {
-	console.log("Application running on http://localhost:"+port);
+mongoose.set('strictQuery', true);
+mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, {}, function(err){
+	if(err){
+		console.error("MONGO CONNECTION ERROR: " + err);
+	}
+	else{
+		console.log("DB Connected Successfully");
+		app.listen(port, () => {
+			console.log("Application running on http://localhost:"+port);
+		});	
+	}
 });
 
