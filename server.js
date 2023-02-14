@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
-
+const userLib = require('./backend/lib/userLib');
 const app = express();
 const util = require('util')
 const port = process.env.PORT || 3030;
@@ -10,6 +10,11 @@ app.use(express.static(__dirname+"/frontend/public"));
 
 app.get('/', (req, res) => {
 	res.sendFile(__dirname+"/frontend/public/views/index.html");
+});
+
+app.get('/api/users', async (req, res) => {
+	var users = await userLib.getAllUsers();
+	res.json(users);
 });
 
 app.get('/api/products', (req, res) => {
@@ -42,7 +47,8 @@ mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, {}, function(err){
 		console.log("DB Connected Successfully");
 		app.listen(port, () => {
 			console.log("Application running on http://localhost:"+port);
-		});	
+		});
+		userLib.addFirstUser();
 	}
 });
 
