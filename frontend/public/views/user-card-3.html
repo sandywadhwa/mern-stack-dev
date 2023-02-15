@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.container{
+			margin-left: 250px;
+		}
+		.card {
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			transition: 0.3s;
+			width: 40%;
+		}
+		.card:hover {
+			box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+		}
+		.card-image{
+			width: 100%;
+		}
+		.card-body {
+			padding: 2px 16px;
+		}
+		.card-body-title{
+			font-weight: bold;
+		}
+		.card-body-designation{
+			font-style: italic;
+		}
+		.toggle-button{
+			margin: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h2>User Card</h2>
+		<div class="card">
+			<img id="userImage" class="card-image" src="/img/avatar_john_doe.png" alt="Avatar">
+			<div class="card-body">
+				<h4 id="userTitle" class="card-body-title">John Doe</h4>
+				<p id="userDesignation" class="card-body-designation">Architect & Engineer</p>
+			</div>
+		</div>
+		<button class="toggle-button" onclick="shuffleUser()">Shuffle</button>
+		<footer>
+			<p><a href="https://randomuser.me/photoshop" target="_blank">Motivation</a></p> |
+			<p><a href="https://randomuser.me">Site for API</a></p>
+		</footer>
+	</div>
+	<script>
+		var userJohn = {"name": "John Doe", designation: "Architect & Engineer", image : "avatar_john_doe.png"};
+		var displayUser = {name: '', designation:'', image:''};
+		var shuffleUser = function(){
+			fetch('https://randomuser.me/api')
+				.then((response) => response.json())
+				.then((data) => {
+					displayUser.name = data.results[0].name.first;
+					displayUser.name += data.results[0].name.last;
+					displayUser.designation = data.results[0].gender;
+					displayUser.image = data.results[0].picture.large;
+					document.getElementById("userTitle").innerHTML = displayUser.name;
+					document.getElementById("userDesignation").innerHTML = displayUser.designation;
+					document.getElementById("userImage").src = displayUser.image;
+				});
+			
+			
+		}
+	</script>
+</body>
+
+</html>
