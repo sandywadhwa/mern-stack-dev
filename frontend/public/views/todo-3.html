@@ -395,6 +395,7 @@
 				</li>
 			</ul>
 		</section>
+		<p id="debugPrint"></p>
 		<footer class="footer"><span class="todo-count"><strong>3</strong> items left
 			</span>
 			<ul class="filters">
@@ -412,6 +413,7 @@
 	</footer>
 
 	<script>
+
 		var STORAGE_KEY = 'todos-beingzero';
 		var todoStorage = {
 			fetch: function () {
@@ -473,6 +475,21 @@
 				}
 			}
 		};
+
+		var addTodoElement = document.getElementById("addTodo");
+		addTodoElement.addEventListener("keypress", function(event) {
+			// If the user presses the "Enter" key on the keyboard
+			if (event.key === "Enter") {
+				// Cancel the default action, if needed
+				event.preventDefault();
+				data.newTodo = addTodoElement.value;
+				data.methods.addTodo();
+				alert(data.todos);
+				document.getElementById("debugPrint").innerHTML = data.todos;
+				// Trigger the button element with a click
+				// document.getElementById("myBtn").click();
+			}
+		});
 
 		var filters = {
 			all: function (todos) {
