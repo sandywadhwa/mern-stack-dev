@@ -1,5 +1,15 @@
 // api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
 
+
+// dd7073d18e3085d0300b6678615d904d
+// b21a2633ddaac750a77524f91fe104e7
+// 467143a2e9e1de3de89328bf80dd0625 
+// 5705666e99157e77c691ea38f0f8bd09
+// 358389cc2e7b7f987ac85f1075b911c6
+// 1cd8359be73c9ae2115d2cf2f813cc25
+// ab73a9132e935adc8d23f99a65d677d6
+// base64.b64decode("ZDY3NTVhYTIxZWE2NzJjZGUxYzQ0MDlmZmQwOWI0MGM=")
+
 const weatherApi = {
     key: "eb7a2d4a5a9b284fe54b7bb547238443",
     baseUrl: "https://api.openweathermap.org/data/2.5/weather", 
