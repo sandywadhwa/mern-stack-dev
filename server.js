@@ -3,15 +3,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const userLib = require('./backend/lib/userLib');
 const app = express();
+const todoApiRouter = require('./backend/routers/todoApiRouter');
 const util = require('util')
 const port = process.env.PORT || 3030;
 
 app.use(express.static(__dirname+"/frontend/public"));
+app.use(express.json());
 
 app.get('/', (req, res) => {
 	res.sendFile(__dirname+"/frontend/public/views/index.html");
 });
 
+
+app.use('/api/todo', todoApiRouter);
 app.get('/api/users', async (req, res) => {
 	var users = await userLib.getAllUsers();
 	res.json(users);
