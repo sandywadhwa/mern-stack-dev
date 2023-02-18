@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Drum Kit</title>
+	<link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet" />
+	<style>
+		body {
+			text-align: center;
+			background-color: #283149;
+		}
+
+		h1 {
+			font-size: 5rem;
+			color: #dbedf3;
+			font-family: "Arvo", cursive;
+			text-shadow: 3px 0 #da0463;
+		}
+
+		footer {
+			color: #dbedf3;
+			font-family: sans-serif;
+		}
+
+		.w {
+			background-image: url("/img/crash.png");
+		}
+
+		.a {
+			background-image: url("/img/kick.png");
+		}
+
+		.s {
+			background-image: url("/img/snare.png");
+		}
+
+		.d {
+			background-image: url("/img/tom1.png");
+		}
+
+		.j {
+			background-image: url("/img/tom2.png");
+		}
+
+		.k {
+			background-image: url("/img/tom3.png");
+		}
+
+		.l {
+			background-image: url("/img/tom4.png");
+		}
+
+		.set {
+			margin: 10% auto;
+		}
+
+		.game-over {
+			background-color: red;
+			opacity: 0.8;
+		}
+
+		.pressed {
+			box-shadow: 0 3px 4px 0 #dbedf3;
+			opacity: 0.5;
+		}
+
+		.red {
+			color: red;
+		}
+
+		.drum {
+			outline: none;
+			border: 10px solid #404b69;
+			font-size: 5rem;
+			font-family: "Arvo", cursive;
+			line-height: 2;
+			font-weight: 900;
+			color: #da0463;
+			text-shadow: 3px 0 #dbedf3;
+			border-radius: 15px;
+			display: inline-block;
+			width: 150px;
+			height: 150px;
+			text-align: center;
+			margin: 10px;
+			background-color: white;
+		}
+	</style>
+</head>
+
+<body>
+	<h1 id="title">Drum 🥁 Kit</h1>
+	<div class="set">
+		<button class="w drum">w</button>
+		<button class="a drum">a</button>
+		<button class="s drum">s</button>
+		<button class="d drum">d</button>
+		<button class="j drum">j</button>
+		<button class="k drum">k</button>
+		<button class="l drum">l</button>
+	</div>
+
+	<footer>Made in India ❤️</footer>
+	<script>
+		let numberOfDrum = document.querySelectorAll(".drum").length;
+
+		for (let i = 0; i < numberOfDrum; i++) {
+			document.querySelectorAll(".drum")[i].addEventListener("click", function () {
+				var buttonPressed = this.innerHTML;
+				makeSound(buttonPressed);
+				addAnimation(buttonPressed);
+			});
+		}
+
+		document.addEventListener("keydown", function (event) {
+			makeSound(event.key);
+			addAnimation(event.key);
+		});
+
+		function addAnimation(currentKey) {
+			document.querySelector("." + currentKey).classList.add("pressed");
+			setTimeout(function () {
+				document.querySelector("." + currentKey).classList.remove("pressed");
+			}, 100);
+		}
+
+		function makeSound(key) {
+			switch (key) {
+				case "w":
+					let crash = new Audio("sounds/crash.mp3");
+					crash.play();
+					break;
+
+				case "a":
+					let kick = new Audio("sounds/kick-bass.mp3");
+					kick.play();
+					break;
+
+				case "s":
+					let snare = new Audio("sounds/snare.mp3");
+					snare.play();
+					break;
+
+				case "d":
+					let tom1 = new Audio("sounds/tom-1.mp3");
+					tom1.play();
+					break;
+
+				case "j":
+					let tom2 = new Audio("sounds/tom-2.mp3");
+					tom2.play();
+					break;
+
+				case "k":
+					let tom3 = new Audio("sounds/tom-3.mp3");
+					tom3.play();
+					break;
+
+				case "l":
+					let tom4 = new Audio("sounds/tom-4.mp3");
+					tom4.play();
+					break;
+
+				default:
+					console.log(buttonPressed);
+					break;
+			}
+		}
+
+	</script>
+</body>
+
+</html>
