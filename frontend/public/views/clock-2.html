@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <title>Pomodoro Clock</title>
+	<style>
+		    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        background-color: #d4b585;
+    }
+    
+    h1 {
+        font-family: 'Pacifico', cursive;
+        color: #361800;
+        font-size: 40px;
+        text-align: center;
+        margin-top: 15px;
+    }
+    h2{
+        font-family: 'Roboto Slab', serif;
+        color: #d4b585;
+        text-align: center;
+        font-size: 25px;
+        margin-top: 20px;
+        margin-left:2px;
+    }
+    
+    .container {
+        height: 460px;
+        width: 260px;
+        margin-left: -130px;
+        border-radius: 20px;
+        /* half of width */
+        margin-top: -230px;
+        /* half of height*/
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 0px 2px 5px black;
+    }
+    
+    .child {
+        height: 230px;
+        width: 260px;
+        background-color: #2e2823;
+    }
+    
+    .timing {
+        font-size: 40px;
+        color: #ffffff;
+        margin-left: 13px;
+        font-family: 'Roboto Slab', serif;
+    }
+    
+    #ch1 {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+    
+    #ch2 {
+        background-color: rgb(102, 71, 71);
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+    
+    .timebox {
+        display: flex;
+        padding: 40px;
+        margin: 0px 15px 0px 15px;
+    }
+    
+    .ts {
+        font-family: 'Roboto Slab', serif;
+        color: #fff;
+        font-size: 28px;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    #st1{
+
+        position: relative;
+        left: 3px;
+        width: 150px;
+        color: rgb(0, 183, 255);
+    }
+    
+    #st2 {
+
+        width: 50%;
+        font-size: 18px;
+        position: relative;
+        right: 2px;
+        bottom: 1px;
+        color: rgb(255, 166, 0);
+    }
+    
+    .ch2ch {
+        display: flex;
+        margin-top: 10px;
+    }
+    
+    .sst {
+        margin-left: 10px;
+        font-size: 20px;
+        color: #fff;
+    }
+
+    #sst2{
+        position: relative;
+        left: 10px;
+    }
+    
+    .std {
+        font-size: 40px;
+        font-family: 'Roboto Slab', serif;
+        margin-left: 17px;
+    }
+    
+    #bt {
+        margin-left: 25px;
+    }
+    
+    .pmbtn {
+        height: 20px;
+        width: 40px;
+        margin-left: 8px;
+        font-family: 'Roboto Slab', serif;
+        font-size: 15px;
+        border-radius: 5px;
+        border: none;
+        background-color: rgb(43, 25, 25);
+        color: #fff;
+    }
+    
+    #pmbtn1 {
+        margin-left: 12px;
+    }
+    
+    #pmbtn2 {
+        margin-left: 4px;
+    }
+    
+    #pmbtn3 {
+        margin-left: 21px;
+    }
+    
+    #pmbtn4 {
+        margin-left: 4px;
+    }
+    
+    .pmbtn:hover {
+        background-color: rgb(105, 2, 2);
+    }
+    
+    .pmbtn:active {
+        background-color: rgb(105, 2, 2);
+        box-shadow: 0 2px rgb(112, 68, 68);
+        transform: translateY(2px);
+    }
+    
+    .mnbtn {
+        height: 40px;
+        width: 90px;
+        margin-left: 15px;
+        font-family: 'Roboto Slab', serif;
+        font-size: 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: rgb(43, 25, 25);
+        color: #fff;
+    }
+
+    #rstbtn{
+        margin-left: 52px;;
+    }
+
+    
+    .mnbtn:hover {
+        background-color: rgb(105, 2, 2);
+    }
+    
+    .mnbtn:active {
+        background-color: rgb(105, 2, 2);
+        box-shadow: 0 10px rgb(112, 68, 68);
+        transform: translateY(2px);
+    }
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgb(43, 25, 25);
+        color: white;
+        text-align: center;
+     }
+	</style>
+</head>
+
+<body onload="display()">
+    <h1>Pomodoro Clock</h1>
+
+    <div class="container">
+        <div class="child" id="ch1">
+            <h2 id="msg">Set some value</h2>
+            <div class="timebox">
+                <div>
+                    <h1 id="min" class="timing"></h1>
+                </div>
+                <div>
+                    <h1 id="colon" class="timing">:</h1>
+                </div>
+                <div>
+                    <h1 id="sec" class="timing"></h1>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+        <div class="child" id="ch2">
+            <div id="status">
+                <h3 class="ts" id="stat"></h3>
+            </div>
+            <div class="ch2ch" id="ch2ch1">
+                <div class="settime" id="st1">
+                    <span class="sst">Set Session</span><br>
+                    <span id="st" class="std"></span><span
+                        style="font-size: 30px; margin-left: 5px;">min</span><br><button class="pmbtn" id="pmbtn1"
+                        onclick="sessionTimeDecrement()">-</button>
+                    <button class="pmbtn" id="pmbtn2" onclick="sessionTimeIncrement()">+</button>
+
+
+                </div>
+                <div class="settime" id="st2">
+                    <span class="sst" id="sst2">Set Break</span><br>
+                    <span id="bt" class="std"></span><span style="font-size: 30px; margin-left: 5px;">min</span><br>
+                    <button class="pmbtn" id="pmbtn3" onclick="breakTimeDecrement()">-</button>
+                    <button class="pmbtn" id="pmbtn4" onclick="breakTimeIncrement()">+</button>
+                </div>
+
+            </div>
+
+
+            <div class="ch2ch" id="ch2ch2">
+                <button class="mnbtn" id="mnbtn1" onclick="start()"></button><button id="rstbtn" class="mnbtn"
+                    onclick="reset()">RESET</button>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="footer">
+        <!-- <p>@2021 This Project has been created by Tushar Nain</p> -->
+    </div>
+    <script>
+		// Declaring Global Variables
+var min = "00";
+var colon = ':';
+var sec = "00";
+var stat = "Set Timer";
+var stater = 0;
+var st = 0;
+var bt = 0;
+var stbtn = "START";
+var startstatus = 0;
+var btst = 1;
+var timeSecond = 1000;
+var designPattern = "-------------------";
+// Importing Audio Files
+var bell = new Audio('sounds/bell.mp3');
+var click = new Audio ('sounds/click.mp3');
+
+
+function pad(num) {
+    if (num >= 0 && num <= 9) {
+        num = '0' + num;
+    }
+    return num;
+}
+
+function display() {
+    document.getElementById("min").innerHTML = min;
+    document.getElementById("colon").innerHTML = colon;
+    document.getElementById("sec").innerHTML = sec;
+    document.getElementById("stat").innerHTML = stat;
+    document.getElementById("st").innerHTML = st;
+    document.getElementById("bt").innerHTML = bt;
+    document.getElementById("mnbtn1").innerHTML = stbtn;
+    document.getElementById("msg").innerHTML = designPattern;
+
+}
+
+
+
+function sessionTimeIncrement() {
+    if (startstatus == 0) {
+        click.play();
+        st++;
+        min = sec = "00";
+        display();
+    } else {
+        resetTheCurrentSessionMessage();
+    }
+}
+
+function sessionTimeDecrement() {
+    if (startstatus == 0) {
+        if (st > 0) {
+            click.play();
+            st--;
+            min = sec = "00";
+            display();
+        }
+    } else {
+        resetTheCurrentSessionMessage();
+    }
+}
+
+function breakTimeIncrement() {
+    if (startstatus == 0) {
+        click.play();
+        bt++;
+        min = sec = "00";
+        display();
+    } else {
+        resetTheCurrentSessionMessage();
+    }
+}
+
+function breakTimeDecrement() {
+    if (startstatus == 0) {
+        if (bt > 0) {
+            click.play();
+            bt--;
+            min = sec = "00";
+            display();
+        }
+    } else {
+        resetTheCurrentSessionMessage();
+    }
+}
+
+function resetTheCurrentSessionMessage() {
+    document.getElementById("msg").innerHTML = "Reset current session!";
+    setTimeout(function () {
+        document.getElementById("msg").innerHTML = designPattern;
+    }, 3000)
+}
+
+
+
+var ss;
+var ct;
+var secbk;
+var minbk;
+function start() {
+
+
+    if (st == 0) {
+        document.getElementById("msg").innerHTML = "Set Session Time!";
+        setTimeout(function () {
+            document.getElementById("msg").innerHTML = designPattern;
+        }, 3000)
+        return;
+    }
+    if (startstatus == 0) {
+        startstatus = 1;
+    } else {
+        return;
+    }
+    bell.play();
+    stater++;
+    stat = "Session " + stater;
+    document.getElementById("stat").style.color = "#ffe7c4";
+    document.getElementById("min").style.color = "#ffe7c4";
+    document.getElementById("sec").style.color = "#ffe7c4";
+    document.getElementById("colon").style.color = "#ffe7c4";
+    display();
+    sec = 60;
+    min = st - 1;
+    ct = (st * 60) - 1;
+
+
+    timer();
+
+}
+function timer() {
+    var i = 0;
+
+    ss = setInterval(function () {
+        sec--;
+        secbk = sec;
+        minbk = min;
+        sec = pad(sec);
+
+
+
+        if (sec < 0) {
+            sec = 59;
+            secbk = 59
+            min--;
+            minbk--;
+        }
+
+        min = pad(min);
+
+
+        display();
+
+        sec = secbk;
+        min = minbk;
+
+        if (i > ct) {
+
+            if (bt == 0) {
+                clearInterval(ss);
+                startstatus = 0;
+                reset();
+            } else {
+                clearInterval(ss);
+                btstart();
+            }
+        }
+        i++;
+    }, timeSecond)
+}
+
+
+function btstart() {
+    if (btst == 0) btst = 1;
+    else btst = 0;
+    if (btst == 0) {
+        bell.play();
+        min = bt - 1;
+        var minb = min;
+        sec = 59;
+        ct = (bt * 60) - 2;
+        sessionBreakeColorChange("#ff2929");
+        stat = "BREAK";
+
+        min = pad(min);
+
+        display();
+        sec = 60;
+        min = minb;
+        timer();
+    } else {
+        bell.play();
+        sessionBreakeColorChange("#ffe7c4")
+        stater++;
+        stat = "SESSION " + stater;
+        sec = 60;
+        var secb = sec;
+        sec = 59;
+        min = st - 1;
+        var minb = min;
+        ct = (st * 60) - 1;
+        min = pad(min);
+
+        display();
+        sec = secb;
+        min = minb;
+        timer();
+    }
+}
+function sessionBreakeColorChange(color) {
+    document.getElementById("stat").style.color = color;
+    document.getElementById("min").style.color = color;
+    document.getElementById("sec").style.color = color;
+    document.getElementById("colon").style.color = color;
+}
+
+function reset() {
+    clearInterval(ss);
+    startstatus = 0;
+    min = "00";
+    sec = "00";
+    stat = "Set Timer";
+    stater = 0;
+    st = 0;
+    bt = 0;
+    stbtn = "START";
+    sessionBreakeColorChange("#ffffff");
+    display();
+}
+	</script>
+
+    <!-- For dynamic year in the footer -->
+    <script>
+        var footer = document.querySelector(".footer");
+        const date = new Date();
+
+        var para = document.createElement("P");
+        var text = document.createTextNode(`@ ${date.getFullYear()} This Project has been created by Tushar Nain`);
+
+        para.appendChild(text);
+
+        footer.appendChild(para);
+
+    </script>
+</body>
+
+</html>
