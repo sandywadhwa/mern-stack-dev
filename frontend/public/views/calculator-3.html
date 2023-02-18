@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Calculator</title>
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		body {
+			background: #b7b6b6;
+		}
+
+		.button {
+			width: 75px;
+			height: 50px;
+			font-size: 25px;
+			margin: 2px;
+			cursor: pointer;
+			border: none;
+		}
+
+		.textview {
+			width: 305px;
+			margin: 5px;
+			font-size: 25px;
+			padding: 5px;
+			border: none;
+			background: transparent;
+		}
+
+		.main {
+			width: 327px;
+			height: 390px;
+			background: #efecec;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translateX(-50%)translateY(-50%);
+			border: 1px solid grey;
+		}
+
+		.number {
+			background: white;
+			font-weight: bold;
+		}
+
+		.symbol {
+			background: #fbfbfb;
+		}
+
+		.gray:hover {
+			background: #e0e0e0;
+		}
+
+		.blue:hover {
+			background: #03a9f4;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="main">
+		<form name="myform">
+			<input type="text" name="textview" class="textview" disabled>
+		</form>
+		<table>
+			<tr>
+				<td><input type="button" class="button number  gray" value="sin" onclick="d('sin')"></td>
+				<td><input type="button" class="button number  gray" value="cos" onclick="d('cos')"></td>
+				<td><input type="button" class="button number  gray" value="tan" onclick="d('tan')"></td>
+				<td><input type="button" class="button symbol blue" value="1/x" onclick="d('inverse')"></td>
+			</tr>
+			<tr>
+				<td><input type="button" class="button symbol gray" value="&#8730;" onclick="SR('r')" id="r" disabled>
+				</td>
+				<td><input type="button" class="button symbol  gray" value="x²" onclick="SR('s')" id="s" disabled></td>
+				<td><input type="button" class="button symbol  gray" value="&#9003;" onclick="back()"></td>
+				<td><input type="button" class="button symbol blue" value="÷" onclick="insertOp('/')"></td>
+			</tr>
+			<tr>
+				<td><input type="button" class="button number  gray" value="7" onclick="insertNum(7)"></td>
+				<td><input type="button" class="button number  gray" value="8" onclick="insertNum(8)"></td>
+				<td><input type="button" class="button number  gray" value="9" onclick="insertNum(9)"></td>
+				<td><input type="button" class="button symbol blue" value="x" onclick="insertOp('*')"></td>
+			</tr>
+			<tr>
+				<td><input type="button" class="button number  gray" value="4" onclick="insertNum(4)"></td>
+				<td><input type="button" class="button number  gray" value="5" onclick="insertNum(5)"></td>
+				<td><input type="button" class="button number  gray" value="6" onclick="insertNum(6)"></td>
+				<td><input type="button" class="button symbol  blue" value="-" onclick="insertOp('-')"></td>
+			</tr>
+			<tr>
+				<td><input type="button" class="button number  gray" value="1" onclick="insertNum(1)"></td>
+				<td><input type="button" class="button number  gray" value="2" onclick="insertNum(2)"></td>
+				<td><input type="button" class="button number  gray" value="3" onclick="insertNum(3)"></td>
+				<td><input type="button" class="button symbol  blue" value="+" onclick="insertOp('+')"></td>
+			</tr>
+			<tr>
+				<td><input type="button" class="button symbol  gray" value="&#9114;" onclick="clean()"></td>
+				<td><input type="button" class="button number  gray" value="0" onclick="insertNum(0)"></td>
+				<td><input type="button" class="button symbol  gray" value="." onclick="insertDec('.')"></td>
+				<td><input type="button" class="button symbol blue" value="=" onclick="equalto()"></td>
+			</tr>
+		</table>
+	</div>
+	<script>
+		var exp = " ", number, decimal, equal, operator, allowSR = true;
+		var textview = document.forms['myform']['textview'];
+
+		function insertNum(num) {
+			if (equal) {
+				exp = num;
+				textview.value = exp;
+				number = true;
+				equal = false;
+			}
+			else {
+				exp = textview.value + num;
+				textview.value = exp;
+				number = true;
+			}
+			if (operator) decimal = false;
+			SR('a');
+		}
+
+
+		function insertOp(op) {
+			textview.value = exp + op;
+			operator = true;
+			equal = false;
+			allowSR = false;
+			SR('a');
+		}
+
+		function insertDec() {
+			if (number && !decimal) {
+				textview.value = exp + '.';
+				decimal = true;
+				operator = false;
+			}
+		}
+
+		function equalto() {
+			if (exp) {
+				exp = eval(exp);
+				textview.value = exp;
+				eqaul = true;
+				decimal = false;
+				number = false;
+				allowSR = true;
+				SR("a");
+			}
+		}
+
+		function clean() {
+			exp = ' ';
+			textview.value = exp;
+			decimal = true;
+		}
+
+		function back() {
+			exp = textview.value;
+			exp = exp.substring(0, exp.length - 1);
+			textview.value = exp;
+		}
+
+		function SR(x) {
+			if (x == 'r') {
+				exp = Math.sqrt(exp);
+				textview.value = exp;
+			} else if (x == 's') {
+				exp = exp * exp;
+				textview.value = exp;
+			} else if (x == 'a' && allowSR) {
+				document.getElementById('r').disabled = false;
+				document.getElementById('s').disabled = false;
+			} else if (!allowSR) {
+				document.getElementById('r').disabled = true;
+				document.getElementById('s').disabled = true;
+			}
+		}
+
+		function d(k) {
+			if (k == "sin") {
+				exp = Math.sin(exp);
+				textview.value = exp;
+			}
+			else if (k == "cos") {
+				exp = Math.cos(exp);
+				textview.value = exp;
+			}
+			else if (k == "tan") {
+				exp = Math.tan(exp);
+				textview.value = exp;
+			}
+			else if (k == "inverse") {
+				exp = eval(1 / exp);
+				textview.value = exp;
+
+			}
+
+		}
+	</script>
+</body>
+
+</html>
