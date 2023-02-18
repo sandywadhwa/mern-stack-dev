@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Background Colour Changer</title>
+	<style>
+		@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: "Poppins", sans-serif;
+			margin: 0;
+			min-height: 100vh;
+		}
+
+
+
+		button {
+			background-color: #fca311;
+			color: white;
+			padding: 1rem;
+			font-family: inherit;
+			font-size: 1.2rem;
+			box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+			border-radius: 5px;
+			border: none;
+			transition: transform 0.1s linear;
+		}
+
+		button:focus {
+			outline: none;
+		}
+
+		button:active {
+			box-shadow: 0;
+			transform: translate(2px, 2px);
+		}
+	</style>
+</head>
+
+<body>
+	<button id="btn">Change Colour</button>
+	<button> Made with ❤️ By Being Zero!!</button>
+	<script>
+		btn1 = document.getElementById("btn");
+		btn1.addEventListener("click", () => {
+			document.body.style.background = randomBg();
+		});
+		function getRandom(min, max){
+			return Math.floor(Math.random() * 255);
+		}
+		function randomBg() {
+			let red = getRandom(0, 255);
+			let green = getRandom(0, 255);
+			let blue = getRandom(0, 255);
+			let computed = `rgb(${red},${green},${blue})`;
+			// alert(computed);
+			return computed;
+		}
+	</script>
+</body>
+
+</html>
